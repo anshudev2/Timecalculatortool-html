@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Time Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    .input-group {
+      display: flex;
+      margin-bottom: 20px;
+    }
+
+    .input-group label {
+      width: 100px;
+      margin-right: 10px;
+      font-weight: bold;
+      line-height: 30px;
+      color: #666;
+    }
+
+    .input-group input {
+      flex-grow: 1;
+      padding: 5px;
+    }
+
+    .result {
+      text-align: center;
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .button {
+      display: inline-block;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 16px;
+      margin-right: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      background-color: #45a049;
+    }
+
+    @media (max-width: 500px) {
+      .input-group {
+        flex-direction: column;
+      }
+
+      .input-group label {
+        margin-bottom: 5px;
+      }
+
+      .button {
+        margin-right: 0;
+        margin-bottom: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Time Calculator</h1>
+    <div class="input-group">
+      <label for="hours">Hours:</label>
+      <input type="number" id="hours" min="0" step="1" required>
+    </div>
+    <div class="input-group">
+      <label for="minutes">Minutes:</label>
+      <input type="number" id="minutes" min="0" max="59" step="1" required>
+    </div>
+    <div class="input-group">
+      <label for="seconds">Seconds:</label>
+      <input type="number" id="seconds" min="0" max="59" step="1" required>
+    </div>
+    <div class="result">
+      <span id="total-hours"></span> hours,
+      <span id="total-minutes"></span> minutes, and
+      <span id="total-seconds"></span> seconds
+    </div>
+    <button class="button" onclick="calculateTime()">Calculate</button>
+    <button class="button" onclick="resetForm()">Reset</button>
+  </div>
+
+  <script>
+    function calculateTime() {
+      var hoursInput = document.getElementById('hours');
+      var minutesInput = document.getElementById('minutes');
+      var secondsInput = document.getElementById('seconds');
+
+      var hours = parseInt(hoursInput.value) || 0;
+      var minutes = parseInt(minutesInput.value) || 0;
+      var seconds = parseInt(secondsInput.value) || 0;
+
+      var totalSeconds = hours * 3600 + minutes * 60 + seconds;
+
+      var totalHours = Math.floor(totalSeconds / 3600);
+      var remainingSeconds = totalSeconds % 3600;
+      var totalMinutes = Math.floor(remainingSeconds / 60);
+      var totalSeconds = remainingSeconds % 60;
+
+      document.getElementById('total-hours').textContent = totalHours;
+      document.getElementById('total-minutes').textContent = totalMinutes;
+      document.getElementById('total-seconds').textContent = totalSeconds;
+    }
+
+    function resetForm() {
+      document.getElementById('hours').value = '';
+      document.getElementById('minutes').value = '';
+      document.getElementById('seconds').value = '';
+
+      document.getElementById('total-hours').textContent = '';
+      document.getElementById('total-minutes').textContent = '';
+      document.getElementById('total-seconds').textContent = '';
+    }
+  </script>
+</body>
+</html>
